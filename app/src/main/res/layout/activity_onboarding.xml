@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".view.onboarding.OnboardingActivity">
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/onboardingViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/view_pager_background"
+        app:layout_constraintBottom_toTopOf="@id/indicatorContainer"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/indicatorContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/actionContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <RelativeLayout
+        android:id="@+id/actionContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSignin"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/colorWhite"
+            android:paddingStart="60dp"
+            android:paddingEnd="60dp"
+            android:text="@string/signin"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:cornerRadius="20dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginStart="5dp"
+            android:backgroundTint="@color/colorAccent"
+            android:paddingStart="60dp"
+            android:paddingEnd="60dp"
+            android:text="@string/signup"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:cornerRadius="20dp"
+            android:layout_toRightOf="@id/buttonSignin"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
