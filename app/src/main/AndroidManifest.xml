@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.authentication.signin.SigninActivity"  android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".view.authentication.signup.SignupActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+
+            ></activity>
+        <activity
+            android:name=".view.authentication.signin.SigninActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -21,8 +28,7 @@
         </activity>
         <activity
             android:name=".view.onboarding.OnboardingActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
