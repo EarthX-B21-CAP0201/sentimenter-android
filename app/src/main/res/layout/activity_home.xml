@@ -36,7 +36,7 @@
         android:id="@+id/logout"
         android:layout_width="50dp"
         android:layout_height="45dp"
-        android:src="@drawable/logout_icon"
+        android:src="@drawable/ic_logout"
         app:layout_constraintBottom_toTopOf="@+id/textName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.947"
@@ -71,7 +71,7 @@
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="2dp"
                 android:contentDescription="@string/top_10_graph"
-                android:src="@drawable/graph_icon" />
+                android:src="@drawable/ic_graph" />
 
             <TextView
                 android:id="@+id/textGraph"
@@ -105,7 +105,7 @@
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="2dp"
                 android:contentDescription="@string/top_10_graph"
-                android:src="@drawable/sentiment_icon" />
+                android:src="@drawable/ic_sentiment" />
 
             <TextView
                 android:id="@+id/textSentiment"
