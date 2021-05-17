@@ -1,4 +1,4 @@
-package com.earthx.sentimenter.data.entity
+package com.earthx.sentimenter.data.model
 
 data class OnboardingItem(
     val onboardingImage: Int,

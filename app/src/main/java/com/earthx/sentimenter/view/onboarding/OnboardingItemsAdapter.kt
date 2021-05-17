@@ -3,7 +3,7 @@ package com.earthx.sentimenter.view.onboarding
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.earthx.sentimenter.data.entity.OnboardingItem
+import com.earthx.sentimenter.data.model.OnboardingItem
 import com.earthx.sentimenter.databinding.OnboardingItemContainerBinding
 
 class OnboardingItemsAdapter(private val onBoardingItems: List<OnboardingItem>) :

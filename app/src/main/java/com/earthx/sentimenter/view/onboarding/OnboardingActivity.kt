@@ -1,5 +1,6 @@
 package com.earthx.sentimenter.view.onboarding
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -9,8 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.earthx.sentimenter.R
-import com.earthx.sentimenter.data.entity.OnboardingItem
+import com.earthx.sentimenter.data.model.OnboardingItem
 import com.earthx.sentimenter.databinding.ActivityOnboardingBinding
+import com.earthx.sentimenter.view.authentication.signin.SigninActivity
+import com.earthx.sentimenter.view.authentication.signup.SignupActivity
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var onboardingBinding: ActivityOnboardingBinding
@@ -24,6 +27,13 @@ class OnboardingActivity : AppCompatActivity() {
         setOnboardingItems()
         setupIndicator()
         setCurrentIndicator(0)
+        onboardingBinding.buttonSignin.setOnClickListener {
+            startActivity(Intent(this, SigninActivity::class.java))
+        }
+        onboardingBinding.buttonSignup.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
+        }
+
     }
 
     private fun setOnboardingItems(){
