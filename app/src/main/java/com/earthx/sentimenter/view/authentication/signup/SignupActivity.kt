@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.earthx.sentimenter.databinding.ActivitySignupBinding
+import com.earthx.sentimenter.view.authentication.signin.SigninActivity
+import com.earthx.sentimenter.view.home.HomeActivity
 import com.earthx.sentimenter.view.onboarding.OnboardingActivity
 
 class SignupActivity : AppCompatActivity() {
@@ -19,6 +21,7 @@ class SignupActivity : AppCompatActivity() {
         }
         onSignupBinding.buttonSignup.setOnClickListener {
             handleSignup()
+            startActivity(Intent(this, HomeActivity::class.java))
         }
     }
 
