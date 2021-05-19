@@ -10,4 +10,10 @@
     <string name="login">LOGIN</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="logout">Logout</string>
+    <string name="name">Name</string>
+    <string name="hi">Hi,</string>
+    <string name="top_10_graph">Top 10 Graph</string>
+    <string name="sentiment_analysis">Sentiment Analysis</string>
+    <string name="last_activity">Last Activity</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.earthx.sentimenter.view.authentication.signup
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,8 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.earthx.sentimenter.data.source.local.sp.SharedPreferences
 import com.earthx.sentimenter.databinding.ActivitySignupBinding
 import com.earthx.sentimenter.view.authentication.signin.SigninActivity
+import com.earthx.sentimenter.view.home.HomeActivity
 import com.earthx.sentimenter.view.authentication.viewmodel.ViewModelFactory
 import com.earthx.sentimenter.view.onboarding.OnboardingActivity
 import com.earthx.sentimenter.vo.Status
@@ -16,29 +19,43 @@ import com.earthx.sentimenter.vo.Status
 class SignupActivity : AppCompatActivity() {
     private lateinit var onSignupBinding: ActivitySignupBinding
     private lateinit var viewModel : SignupViewModel
+    private lateinit var token: String
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        onSignupBinding = ActivitySignupBinding.inflate(layoutInflater)
-        setContentView(onSignupBinding.root)
-
-        val factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[SignupViewModel::class.java]
-
-
-        onSignupBinding.progressBar.visibility = View.GONE
-        onSignupBinding.backButton.setOnClickListener {
-            startActivity(Intent(this, OnboardingActivity::class.java))
+        val sharedPreference =  this.getSharedPreferences(
+            SharedPreferences.loggedUser,
+            Context.MODE_PRIVATE)
+        token = sharedPreference.getString("token","").toString()
+        if(token!=""){
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
-        onSignupBinding.buttonSignup.setOnClickListener {
-            handleSignup()
+        else{
+            super.onCreate(savedInstanceState)
+            onSignupBinding = ActivitySignupBinding.inflate(layoutInflater)
+            setContentView(onSignupBinding.root)
+
+            val factory = ViewModelFactory.getInstance(this)
+            viewModel = ViewModelProvider(this, factory)[SignupViewModel::class.java]
+
+
+            onSignupBinding.progressBar.visibility = View.GONE
+            onSignupBinding.backButton.setOnClickListener {
+                startActivity(Intent(this, OnboardingActivity::class.java))
+                finish()
+            }
+            onSignupBinding.buttonSignup.setOnClickListener {
+                handleSignup()
+                startActivity(Intent(this, HomeActivity::class.java))
+            }
+
+            onSignupBinding.textToLogin.setOnClickListener {
+                startActivity(Intent(this, SigninActivity::class.java))
+                finish()
+
+            }
+
         }
 
-        onSignupBinding.textToLogin.setOnClickListener {
-            startActivity(Intent(this, SigninActivity::class.java))
-            finish()
-
-        }
     }
 
     private fun handleSignup(){

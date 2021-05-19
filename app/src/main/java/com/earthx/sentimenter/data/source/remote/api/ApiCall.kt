@@ -82,5 +82,39 @@ class ApiCall() {
         }
     }
 
+    fun signout(token: String, callback: ApiCallback<UserSignoutResponse>){
+        try{
+            val client = ApiConfig.getApiService().signout(token)
+            client.enqueue(object: Callback<UserSignoutResponse>{
+                override fun onResponse(
+                    call: Call<UserSignoutResponse>,
+                    response: Response<UserSignoutResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val message = response.body()!!.message
+                        val userResponse = UserSignoutResponse(
+                            message = message,
+                            status = response.code()
+                        )
+                        callback.onCallSuccess(userResponse)
+                    } else {
+                        val userResponse = UserSignoutResponse(
+                            message = "something went wrong",
+                            status = response.code()
+                        )
+                        callback.onCallFailed(userResponse)
+                        Log.d("error-msg", "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: Call<UserSignoutResponse>, t: Throwable) {
+                    callback.onCallError(t)
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
+                }
+            })
+        }
+        catch(e: JSONException){
+            e.printStackTrace()
+        }
+    }
 
 }

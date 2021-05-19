@@ -10,6 +10,7 @@ import com.earthx.sentimenter.data.source.remote.api.ApiCall
 import com.earthx.sentimenter.data.source.remote.api.ApiCallback
 import com.earthx.sentimenter.data.source.remote.api.ApiResponse
 import com.earthx.sentimenter.data.source.remote.response.UserSigninResponse
+import com.earthx.sentimenter.data.source.remote.response.UserSignoutResponse
 import com.earthx.sentimenter.data.source.remote.response.UserSignupResponse
 
 class RemoteDataSource private constructor(private val remoteDataSource: ApiCall) {
@@ -100,6 +101,37 @@ class RemoteDataSource private constructor(private val remoteDataSource: ApiCall
         return data
     }
 
+    fun signout(token: String): LiveData<ApiResponse<UserSignoutResponse>> {
+        val data = MutableLiveData<ApiResponse<UserSignoutResponse>>()
+        remoteDataSource.signout(
+           token,
+            object :
+                ApiCallback<UserSignoutResponse> {
+                override fun onCallSuccess(res: UserSignoutResponse) {
+                    val sharedPreference =  ctx?.getSharedPreferences(SharedPreferences.loggedUser,Context.MODE_PRIVATE)
+                    var editor = sharedPreference?.edit()
+                    editor?.remove("id")
+                    editor?.remove("email")
+                    editor?.remove("token")
+                    editor?.commit()
+                    data.postValue(ApiResponse.success(res))
+                }
+                override fun onCallError(throwable: Throwable) {
+                    val emptyUser = UserSignoutResponse(
+                        message = "",
+                        status = 403
+                    )
+                    data.postValue(ApiResponse.error(throwable.message?:"", emptyUser))
+                    Log.d("ERROR", throwable.message ?: "")
+                }
 
+                override fun onCallFailed(value: UserSignoutResponse) {
+                    data.postValue(ApiResponse.error(value.message, value))
+
+                }
+
+            })
+        return data
+    }
 
 }

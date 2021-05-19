@@ -8,6 +8,7 @@ import com.earthx.sentimenter.data.source.remote.datasource.AuthDataSource
 import com.earthx.sentimenter.data.source.remote.RemoteDataSource
 import com.earthx.sentimenter.data.source.remote.api.ApiResponse
 import com.earthx.sentimenter.data.source.remote.api.StatusResponse
+import com.earthx.sentimenter.data.source.remote.response.UserSignoutResponse
 import com.earthx.sentimenter.data.source.remote.response.UserSignupResponse
 import com.earthx.sentimenter.vo.Resource
 
@@ -67,4 +68,18 @@ class AuthRepository private constructor(private val remoteDataSource: RemoteDat
         return asLiveData()
     }
 
+    override fun signout(token: String): LiveData<Resource<UserSignoutResponse>> {
+        val result = MediatorLiveData<Resource<UserSignoutResponse>>()
+        fun asLiveData(): LiveData<Resource<UserSignoutResponse>> = result
+        val userData:LiveData<ApiResponse<UserSignoutResponse>> = remoteDataSource.signout(token)
+        result.value = Resource.loading(null)
+
+        result.addSource(userData){response->
+            when(response.status){
+                StatusResponse.SUCCESS -> result.value = Resource.success(response.body)
+                StatusResponse.ERROR -> result.value = Resource.error(response.message, response.body)
+            }
+        }
+        return asLiveData()
+    }
 }

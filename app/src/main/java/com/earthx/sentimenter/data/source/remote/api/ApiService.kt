@@ -14,5 +14,7 @@ interface ApiService {
     @POST(BuildConfig.BASE_URL+"authentication/signup")
     fun signup(@Field("email") email: String, @Field("password") password: String): Call<UserSignupResponse>
 
+    @POST(BuildConfig.BASE_URL+"authentication/signout")
+    fun signout(@Header("x-access-token") token: String): Call<UserSignoutResponse>
 
 }
