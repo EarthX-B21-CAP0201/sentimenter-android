@@ -10,4 +10,5 @@ interface AuthDataSource {
     fun signin(email: String, password: String): LiveData<Resource<User>>
     fun signup(email: String, password: String): LiveData<Resource<UserSignupResponse>>
     fun signout(token: String): LiveData<Resource<UserSignoutResponse>>
+
 }

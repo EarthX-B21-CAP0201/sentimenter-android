@@ -17,5 +17,4 @@ interface ApiService {
     @POST(BuildConfig.BASE_URL+"authentication/signout")
     fun signout(@Header("x-access-token") token: String): Call<UserSignoutResponse>
 
-
 }

@@ -82,5 +82,4 @@ class AuthRepository private constructor(private val remoteDataSource: RemoteDat
         }
         return asLiveData()
     }
-
 }

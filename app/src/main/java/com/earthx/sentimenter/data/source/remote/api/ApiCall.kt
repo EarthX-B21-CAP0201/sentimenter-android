@@ -82,7 +82,6 @@ class ApiCall() {
         }
     }
 
-
     fun signout(token: String, callback: ApiCallback<UserSignoutResponse>){
         try{
             val client = ApiConfig.getApiService().signout(token)
@@ -117,6 +116,5 @@ class ApiCall() {
             e.printStackTrace()
         }
     }
-
 
 }

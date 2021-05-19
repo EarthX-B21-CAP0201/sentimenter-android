@@ -134,6 +134,4 @@ class RemoteDataSource private constructor(private val remoteDataSource: ApiCall
         return data
     }
 
-
-
 }

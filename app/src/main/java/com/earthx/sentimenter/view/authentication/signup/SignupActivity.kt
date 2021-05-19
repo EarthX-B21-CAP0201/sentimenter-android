@@ -56,7 +56,6 @@ class SignupActivity : AppCompatActivity() {
 
         }
 
-
     }
 
     private fun handleSignup(){
