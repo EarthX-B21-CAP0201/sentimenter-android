@@ -1,5 +1,6 @@
 package com.earthx.sentimenter.view.onboarding
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,28 +12,44 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.earthx.sentimenter.R
 import com.earthx.sentimenter.data.model.OnboardingItem
+import com.earthx.sentimenter.data.source.local.sp.SharedPreferences
 import com.earthx.sentimenter.databinding.ActivityOnboardingBinding
 import com.earthx.sentimenter.view.authentication.signin.SigninActivity
 import com.earthx.sentimenter.view.authentication.signup.SignupActivity
+import com.earthx.sentimenter.view.home.HomeActivity
 
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var onboardingBinding: ActivityOnboardingBinding
     private lateinit var onboardingItemsAdapter: OnboardingItemsAdapter
     private lateinit var indicatorsContainer: LinearLayout
+    private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        onboardingBinding = ActivityOnboardingBinding.inflate(layoutInflater)
-        setContentView(onboardingBinding.root)
-        setOnboardingItems()
-        setupIndicator()
-        setCurrentIndicator(0)
-        onboardingBinding.buttonSignin.setOnClickListener {
-            startActivity(Intent(this, SigninActivity::class.java))
+        val sharedPreference =  this.getSharedPreferences(
+            SharedPreferences.loggedUser,
+            Context.MODE_PRIVATE)
+        token = sharedPreference.getString("token","").toString()
+        if(token!=""){
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         }
-        onboardingBinding.buttonSignup.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+        else{
+            super.onCreate(savedInstanceState)
+            onboardingBinding = ActivityOnboardingBinding.inflate(layoutInflater)
+            setContentView(onboardingBinding.root)
+            setOnboardingItems()
+            setupIndicator()
+            setCurrentIndicator(0)
+            onboardingBinding.buttonSignin.setOnClickListener {
+                startActivity(Intent(this, SigninActivity::class.java))
+            }
+            onboardingBinding.buttonSignup.setOnClickListener {
+                startActivity(Intent(this, SignupActivity::class.java))
+            }
+
         }
+
+
 
     }
 

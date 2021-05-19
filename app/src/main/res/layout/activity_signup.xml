@@ -104,6 +104,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="15dp"
         android:hint="@string/labelPassword"
+        app:passwordToggleEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/textLabelPassword"
         app:layout_constraintStart_toStartOf="parent"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -137,6 +138,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
         />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintTop_toBottomOf="@id/passwordTextField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
