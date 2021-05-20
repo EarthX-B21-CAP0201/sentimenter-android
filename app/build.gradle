@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", "\"http://10.0.2.2:5000/api/v1/\""
+        buildConfigField "String", "BASE_URL", "\"https://earthx-b21-cap0201.herokuapp.com/api/v1/\""
     }
 
     buildFeatures {
