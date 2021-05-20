@@ -25,6 +25,7 @@ class SignupActivity : AppCompatActivity() {
             SharedPreferences.loggedUser,
             Context.MODE_PRIVATE)
         token = sharedPreference.getString("token","").toString()
+
         if(token!=""){
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
@@ -45,7 +46,6 @@ class SignupActivity : AppCompatActivity() {
             }
             onSignupBinding.buttonSignup.setOnClickListener {
                 handleSignup()
-                startActivity(Intent(this, HomeActivity::class.java))
             }
 
             onSignupBinding.textToLogin.setOnClickListener {
