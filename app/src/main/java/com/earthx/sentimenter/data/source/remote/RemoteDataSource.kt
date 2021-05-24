@@ -9,9 +9,11 @@ import com.earthx.sentimenter.data.model.User
 import com.earthx.sentimenter.data.source.remote.api.ApiCall
 import com.earthx.sentimenter.data.source.remote.api.ApiCallback
 import com.earthx.sentimenter.data.source.remote.api.ApiResponse
+import com.earthx.sentimenter.data.source.remote.response.GenerateGraphResponse
 import com.earthx.sentimenter.data.source.remote.response.UserSigninResponse
 import com.earthx.sentimenter.data.source.remote.response.UserSignoutResponse
 import com.earthx.sentimenter.data.source.remote.response.UserSignupResponse
+import java.util.*
 
 class RemoteDataSource private constructor(private val remoteDataSource: ApiCall) {
     companion object {
@@ -126,6 +128,42 @@ class RemoteDataSource private constructor(private val remoteDataSource: ApiCall
                 }
 
                 override fun onCallFailed(value: UserSignoutResponse) {
+                    data.postValue(ApiResponse.error(value.message, value))
+
+                }
+
+            })
+        return data
+    }
+
+    fun generateTop10(token:String,keyword:String,
+                      hashtag:String,
+                      category:String,
+                      language:String,
+                      isRetweeted:Boolean,
+                      isRealtime:Boolean,
+                      dateStart: String,
+                      dateEnd: String):LiveData<ApiResponse<GenerateGraphResponse>> {
+        val data = MutableLiveData<ApiResponse<GenerateGraphResponse>>()
+        remoteDataSource.generateGraph(
+            token,keyword,
+            hashtag,category,language,isRetweeted,isRealtime,dateStart,dateEnd,
+            object :
+                ApiCallback<GenerateGraphResponse> {
+                override fun onCallSuccess(res: GenerateGraphResponse) {
+
+                    data.postValue(ApiResponse.success(res))
+                }
+                override fun onCallError(throwable: Throwable) {
+                    val emptyData = GenerateGraphResponse(
+                        message = "",
+                        status = 403
+                    )
+                    data.postValue(ApiResponse.error(throwable.message?:"", emptyData))
+                    Log.d("ERROR", throwable.message ?: "")
+                }
+
+                override fun onCallFailed(value: GenerateGraphResponse) {
                     data.postValue(ApiResponse.error(value.message, value))
 
                 }
