@@ -119,5 +119,8 @@
     <string name="count">10000</string>
     <string name="failedText">Oops! something bad happened!</string>
     <string name="backhome">Go Back</string>
+    <string name="textDate">--/--/--</string>
+    <string name="labelDateStart">date start</string>
+    <string name="labelDateEnd">date end</string>
 
 </resources>

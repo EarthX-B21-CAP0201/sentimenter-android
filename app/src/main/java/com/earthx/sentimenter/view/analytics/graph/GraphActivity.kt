@@ -3,7 +3,6 @@ package com.earthx.sentimenter.view.analytics.graph
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -16,8 +15,13 @@ import com.earthx.sentimenter.databinding.ActivityGraphBinding
 import com.earthx.sentimenter.view.analytics.viewmodel.ViewModelFactory
 import com.earthx.sentimenter.view.status.FailedActivity
 import com.earthx.sentimenter.vo.Status
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Date.from
+
 
 class GraphActivity : AppCompatActivity() {
     private lateinit var onGraphActivityBinding: ActivityGraphBinding
@@ -36,6 +40,7 @@ class GraphActivity : AppCompatActivity() {
         onGraphActivityBinding = ActivityGraphBinding.inflate(layoutInflater)
         setContentView(onGraphActivityBinding.root)
         setDropdownMenus()
+        setDatePicker()
         onGraphActivityBinding.progressBar.visibility = View.GONE
         onGraphActivityBinding.buttonGenerate.setOnClickListener {
             generateGraph()
@@ -61,6 +66,44 @@ class GraphActivity : AppCompatActivity() {
 
     }
 
+    private fun setDatePicker(){
+        val today = MaterialDatePicker.todayInUtcMilliseconds()
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointBackward.now())
+        val pickerStart =
+            MaterialDatePicker.Builder.datePicker()
+                .setSelection(today)
+                .setCalendarConstraints(constraintsBuilder.build())
+                .setTitleText("Select start date")
+
+                .build()
+        val pickerEnd =
+            MaterialDatePicker.Builder.datePicker()
+                .setSelection(today)
+                .setCalendarConstraints(constraintsBuilder.build())
+                .setTitleText("Select end date")
+
+                .build()
+
+        onGraphActivityBinding.pickDatestartButton.setOnClickListener {
+            pickerStart.show(supportFragmentManager, "tag")
+        }
+        pickerStart.addOnPositiveButtonClickListener {
+            onGraphActivityBinding.textDateStart.text = pickerStart.headerText
+        }
+
+        onGraphActivityBinding.pickDateendButton.setOnClickListener {
+            pickerEnd.show(supportFragmentManager, "tag")
+        }
+        pickerEnd.addOnPositiveButtonClickListener {
+            onGraphActivityBinding.textDateEnd.text = pickerEnd.headerText
+        }
+
+
+
+    }
+
     private fun generateGraph(){
         val keyword = onGraphActivityBinding.keywordTextField.editText?.text.toString()
         val hashtag = onGraphActivityBinding.hashtagTextField.editText?.text.toString()
@@ -69,10 +112,8 @@ class GraphActivity : AppCompatActivity() {
         val isRetweeted = onGraphActivityBinding.isRetweeted.isChecked
         val isRealtime = onGraphActivityBinding.isRealtime.isChecked
 
-        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        val currentDate = sdf.format(Date())
-        val dateStart = currentDate
-        val dateEnd = currentDate
+        val dateStart = onGraphActivityBinding.textDateStart.text.toString()
+        val dateEnd = onGraphActivityBinding.textDateEnd.text.toString()
         viewModel.generateTop10(token,keyword,
             hashtag,category,language,isRetweeted,isRealtime,dateStart,dateEnd).observe(this, Observer{
                 data->
