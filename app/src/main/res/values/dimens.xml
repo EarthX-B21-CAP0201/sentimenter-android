@@ -2,4 +2,5 @@
 <resources>
     <dimen name="scale_5dp">5dp</dimen>
     <dimen name="scale_7dp">7dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

@@ -7,6 +7,8 @@ import org.json.JSONException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Field
+import java.util.*
 
 class ApiCall() {
     fun signin(email: String, password: String, callback: ApiCallback<UserSigninResponse>){
@@ -107,6 +109,52 @@ class ApiCall() {
                     }
                 }
                 override fun onFailure(call: Call<UserSignoutResponse>, t: Throwable) {
+                    callback.onCallError(t)
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
+                }
+            })
+        }
+        catch(e: JSONException){
+            e.printStackTrace()
+        }
+    }
+
+    fun generateGraph(token: String,
+                        keyword:String,
+                        hashtag:String,
+                        category:String,
+                        language:String,
+                        isRetweeted:Boolean,
+                        isRealtime:Boolean,
+                        dateStart: String,
+                        dateEnd: String,
+                        callback: ApiCallback<GenerateGraphResponse>){
+        try{
+            val client = ApiConfig.getApiService().generateTop10(token, keyword, hashtag, category, language, isRetweeted, isRealtime, dateStart, dateEnd)
+            client.enqueue(object: Callback<GenerateGraphResponse>{
+                override fun onResponse(
+                    call: Call<GenerateGraphResponse>,
+                    response: Response<GenerateGraphResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val message = response.body()!!.message
+                        val results = response.body()!!.result
+                        val graphResponse = GenerateGraphResponse(
+                            message = message,
+                            status = response.code(),
+                            result = results
+                        )
+                        callback.onCallSuccess(graphResponse)
+                    } else {
+                        val graphResponse = GenerateGraphResponse(
+                            message = "something went wrong",
+                            status = response.code()
+                        )
+                        callback.onCallFailed(graphResponse)
+                        Log.d("error-msg", "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: Call<GenerateGraphResponse>, t: Throwable) {
                     callback.onCallError(t)
                     Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
                 }

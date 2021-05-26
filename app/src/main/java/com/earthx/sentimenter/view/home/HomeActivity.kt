@@ -4,13 +4,12 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.earthx.sentimenter.data.source.local.sp.SharedPreferences
 import com.earthx.sentimenter.databinding.ActivityHomeBinding
-import com.earthx.sentimenter.view.authentication.signin.SigninActivity
+import com.earthx.sentimenter.view.analytics.graph.GraphActivity
 import com.earthx.sentimenter.view.home.viewmodel.ViewModelFactory
 import com.earthx.sentimenter.view.onboarding.OnboardingActivity
 import com.earthx.sentimenter.vo.Status
@@ -52,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun handleGraph(){
-        Toast.makeText(applicationContext, "Membuka fitur graph", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, GraphActivity::class.java))
     }
 
     private fun handleSentiment(){
