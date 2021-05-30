@@ -10,6 +10,7 @@ import com.earthx.sentimenter.data.source.remote.api.ApiResponse
 import com.earthx.sentimenter.data.source.remote.api.StatusResponse
 import com.earthx.sentimenter.data.source.remote.datasource.AnalyticsDataSource
 import com.earthx.sentimenter.data.source.remote.response.GenerateGraphResponse
+import com.earthx.sentimenter.data.source.remote.response.GenerateSentimentResponse
 import com.earthx.sentimenter.data.source.remote.response.UserSignoutResponse
 import com.earthx.sentimenter.data.source.remote.response.UserSignupResponse
 import com.earthx.sentimenter.vo.Resource
@@ -61,6 +62,23 @@ class AnalyticsRepository private constructor(private val remoteDataSource: Remo
             }
         }
         return asLiveData()
+    }
 
+    override fun generateSentiment(
+        token: String,
+        keyword: String
+    ): LiveData<Resource<GenerateSentimentResponse>> {
+        val result = MediatorLiveData<Resource<GenerateSentimentResponse>>()
+        fun asLiveData(): LiveData<Resource<GenerateSentimentResponse>> = result
+        val userData:LiveData<ApiResponse<GenerateSentimentResponse>> = remoteDataSource.generateSentiment(token,keyword)
+        result.value = Resource.loading(null)
+
+        result.addSource(userData){response->
+            when(response.status){
+                StatusResponse.SUCCESS -> result.value = Resource.success(response.body)
+                StatusResponse.ERROR -> result.value = Resource.error(response.message, response.body)
+            }
+        }
+        return asLiveData()
     }
 }

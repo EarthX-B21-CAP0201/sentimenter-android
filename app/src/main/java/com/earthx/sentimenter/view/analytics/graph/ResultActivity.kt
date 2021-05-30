@@ -20,6 +20,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 class ResultActivity : AppCompatActivity() {
     private lateinit var onResultActivityBinding: ActivityResultBinding
     private var listResult : ArrayList<ResultGraphItem> = ArrayList<ResultGraphItem>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onResultActivityBinding = ActivityResultBinding.inflate(layoutInflater)

@@ -165,4 +165,43 @@ class ApiCall() {
         }
     }
 
+    fun generateSentiment(token: String,
+                      keyword:String,
+                      callback: ApiCallback<GenerateSentimentResponse>){
+        try{
+            val client = ApiConfig.getApiService().generateSentiment(token, keyword)
+            client.enqueue(object: Callback<GenerateSentimentResponse>{
+                override fun onResponse(
+                    call: Call<GenerateSentimentResponse>,
+                    response: Response<GenerateSentimentResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val message = response.body()!!.message
+                        val results = response.body()!!.result
+                        val graphResponse = GenerateSentimentResponse(
+                            message = message,
+                            status = response.code(),
+                            result = results
+                        )
+                        callback.onCallSuccess(graphResponse)
+                    } else {
+                        val graphResponse = GenerateSentimentResponse(
+                            message = "something went wrong",
+                            status = response.code()
+                        )
+                        callback.onCallFailed(graphResponse)
+                        Log.d("error-msg", "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: Call<GenerateSentimentResponse>, t: Throwable) {
+                    callback.onCallError(t)
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
+                }
+            })
+        }
+        catch(e: JSONException){
+            e.printStackTrace()
+        }
+    }
+
 }
