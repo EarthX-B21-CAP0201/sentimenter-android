@@ -24,6 +24,5 @@ class ResultSentimentActivity : AppCompatActivity() {
         pieDataSet.setValueTextSize(16f)
 
         val pieData = PieData(pieDataSet)
-
     }
 }
