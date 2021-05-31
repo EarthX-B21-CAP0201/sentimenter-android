@@ -9,11 +9,7 @@ import com.earthx.sentimenter.data.model.User
 import com.earthx.sentimenter.data.source.remote.api.ApiCall
 import com.earthx.sentimenter.data.source.remote.api.ApiCallback
 import com.earthx.sentimenter.data.source.remote.api.ApiResponse
-import com.earthx.sentimenter.data.source.remote.response.GenerateGraphResponse
-import com.earthx.sentimenter.data.source.remote.response.UserSigninResponse
-import com.earthx.sentimenter.data.source.remote.response.UserSignoutResponse
-import com.earthx.sentimenter.data.source.remote.response.UserSignupResponse
-import java.util.*
+import com.earthx.sentimenter.data.source.remote.response.*
 
 class RemoteDataSource private constructor(private val remoteDataSource: ApiCall) {
     companion object {
@@ -96,9 +92,7 @@ class RemoteDataSource private constructor(private val remoteDataSource: ApiCall
 
                 override fun onCallFailed(value: UserSignupResponse) {
                     data.postValue(ApiResponse.error(value.message, value))
-
                 }
-
             })
         return data
     }
@@ -165,11 +159,60 @@ class RemoteDataSource private constructor(private val remoteDataSource: ApiCall
 
                 override fun onCallFailed(value: GenerateGraphResponse) {
                     data.postValue(ApiResponse.error(value.message, value))
-
                 }
-
             })
         return data
     }
 
+    fun generateSentiment(token:String, keyword:String):LiveData<ApiResponse<GenerateSentimentResponse>> {
+        val data = MutableLiveData<ApiResponse<GenerateSentimentResponse>>()
+        remoteDataSource.generateSentiment(
+            token,keyword,
+            object :
+                ApiCallback<GenerateSentimentResponse> {
+                override fun onCallSuccess(value: GenerateSentimentResponse) {
+
+                    data.postValue(ApiResponse.success(value))
+                }
+                override fun onCallError(throwable: Throwable) {
+                    val emptyData = GenerateSentimentResponse(
+                        message = "",
+                        status = 403
+                    )
+                    data.postValue(ApiResponse.error(throwable.message?:"", emptyData))
+                    Log.d("ERROR", throwable.message ?: "")
+                }
+
+                override fun onCallFailed(value: GenerateSentimentResponse) {
+                    data.postValue(ApiResponse.error(value.message, value))
+                }
+            })
+        return data
+    }
+
+    fun getLastActivity(token:String):LiveData<ApiResponse<LastActivityResponse>> {
+        val data = MutableLiveData<ApiResponse<LastActivityResponse>>()
+        remoteDataSource.getLastActivity(
+            token,
+            object :
+                ApiCallback<LastActivityResponse> {
+                override fun onCallSuccess(value: LastActivityResponse) {
+                    data.postValue(ApiResponse.success(value))
+                }
+                override fun onCallError(throwable: Throwable) {
+                    val emptyData = LastActivityResponse(
+                        message = "",
+                        status = 403,
+                        result = ArrayList()
+                    )
+                    data.postValue(ApiResponse.error(throwable.message?:"", emptyData))
+                    Log.d("ERROR", throwable.message ?: "")
+                }
+
+                override fun onCallFailed(value: LastActivityResponse) {
+                    data.postValue(ApiResponse.error(value.message, value))
+                }
+            })
+        return data
+    }
 }

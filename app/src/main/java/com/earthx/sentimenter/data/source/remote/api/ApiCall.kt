@@ -9,6 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Field
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ApiCall() {
     fun signin(email: String, password: String, callback: ApiCallback<UserSigninResponse>){
@@ -155,6 +156,84 @@ class ApiCall() {
                     }
                 }
                 override fun onFailure(call: Call<GenerateGraphResponse>, t: Throwable) {
+                    callback.onCallError(t)
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
+                }
+            })
+        }
+        catch(e: JSONException){
+            e.printStackTrace()
+        }
+    }
+
+    fun generateSentiment(token: String,
+                      keyword:String,
+                      callback: ApiCallback<GenerateSentimentResponse>){
+        try{
+            val client = ApiConfig.getApiService().generateSentiment(token, keyword)
+            client.enqueue(object: Callback<GenerateSentimentResponse>{
+                override fun onResponse(
+                    call: Call<GenerateSentimentResponse>,
+                    response: Response<GenerateSentimentResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val message = response.body()!!.message
+                        val results = response.body()!!.result
+                        val graphResponse = GenerateSentimentResponse(
+                            message = message,
+                            status = response.code(),
+                            result = results
+                        )
+                        callback.onCallSuccess(graphResponse)
+                    } else {
+                        val graphResponse = GenerateSentimentResponse(
+                            message = "something went wrong",
+                            status = response.code()
+                        )
+                        callback.onCallFailed(graphResponse)
+                        Log.d("error-msg", "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: Call<GenerateSentimentResponse>, t: Throwable) {
+                    callback.onCallError(t)
+                    Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
+                }
+            })
+        }
+        catch(e: JSONException){
+            e.printStackTrace()
+        }
+    }
+
+    fun getLastActivity(token: String,
+                          callback: ApiCallback<LastActivityResponse>){
+        try{
+            val client = ApiConfig.getApiService().getLastActivity(token)
+            client.enqueue(object: Callback<LastActivityResponse>{
+                override fun onResponse(
+                    call: Call<LastActivityResponse>,
+                    response: Response<LastActivityResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val message = response.body()!!.message
+                        val results = response.body()!!.result
+                        val lastActivityResponse = LastActivityResponse(
+                            message = message,
+                            status = response.code(),
+                            result = results
+                        )
+                        callback.onCallSuccess(lastActivityResponse)
+                    } else {
+                        val lastActivityResponse = LastActivityResponse(
+                            message = "something went wrong",
+                            status = response.code(),
+                            result = ArrayList()
+                        )
+                        callback.onCallFailed(lastActivityResponse)
+                        Log.d("error-msg", "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: Call<LastActivityResponse>, t: Throwable) {
                     callback.onCallError(t)
                     Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
                 }

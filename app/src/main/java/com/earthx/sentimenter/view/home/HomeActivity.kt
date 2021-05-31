@@ -4,12 +4,17 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.earthx.sentimenter.data.model.LastActivityItem
 import com.earthx.sentimenter.data.source.local.sp.SharedPreferences
 import com.earthx.sentimenter.databinding.ActivityHomeBinding
 import com.earthx.sentimenter.view.analytics.graph.GraphActivity
+import com.earthx.sentimenter.view.analytics.sentiment.SentimentActivity
+import com.earthx.sentimenter.view.home.adapter.LastActivityAdapter
 import com.earthx.sentimenter.view.home.viewmodel.ViewModelFactory
 import com.earthx.sentimenter.view.onboarding.OnboardingActivity
 import com.earthx.sentimenter.vo.Status
@@ -20,6 +25,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var viewModel : HomeViewModel
     private lateinit var email : String
     private lateinit var token: String
+    private lateinit var listResult : ArrayList<LastActivityItem>
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val sharedPreference =  this.getSharedPreferences(
@@ -46,8 +53,8 @@ class HomeActivity : AppCompatActivity() {
         }
         onHomeBinding.logout.setOnClickListener {
             handleLogout()
-
         }
+        showLastActivity()
     }
 
     private fun handleGraph(){
@@ -55,8 +62,36 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun handleSentiment(){
-        Toast.makeText(applicationContext, "Membuka fitur sentiment analysis", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, SentimentActivity::class.java))
     }
+
+    private fun showLastActivity() {
+        viewModel.lastActivity(token).observe(this, Observer { data ->
+            if(data != null) {
+                when(data.status) {
+                    Status.LOADING -> {
+                        onHomeBinding.progressBar.visibility = View.VISIBLE
+                        onHomeBinding.rvActivity.visibility = View.GONE
+                        Toast.makeText(applicationContext, "loading", Toast.LENGTH_SHORT).show()
+                    }
+                    Status.SUCCESS -> {
+                        onHomeBinding.progressBar.visibility = View.GONE
+                        onHomeBinding.rvActivity.visibility = View.VISIBLE
+                        Toast.makeText(applicationContext, "Load success", Toast.LENGTH_SHORT).show()
+                        onHomeBinding.rvActivity.layoutManager = LinearLayoutManager(this)
+                        listResult = data.data?.result ?: ArrayList()
+                        val listResultAdapter = LastActivityAdapter(listResult, this)
+                        onHomeBinding.rvActivity.adapter = listResultAdapter
+                    }
+
+                    Status.ERROR->{
+                        Toast.makeText(applicationContext, data.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
+    }
+
     private fun handleLogout(){
         viewModel.signout(token).observe(this, Observer{
                 data->
@@ -75,13 +110,7 @@ class HomeActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, data.message, Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
-
-
-
         })
-
-
     }
 }

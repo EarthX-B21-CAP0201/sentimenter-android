@@ -44,7 +44,6 @@ class GraphActivity : AppCompatActivity() {
         onGraphActivityBinding.progressBar.visibility = View.GONE
         onGraphActivityBinding.buttonGenerate.setOnClickListener {
             generateGraph()
-
         }
 
         onGraphActivityBinding.backButton.setOnClickListener {
@@ -63,7 +62,6 @@ class GraphActivity : AppCompatActivity() {
         val itemsLanguage = listOf("Indonesia", "English")
         val adapterLanguage =  ArrayAdapter(this, R.layout.list_item, itemsLanguage)
       onGraphActivityBinding.menuLanguageAutoComplete.setAdapter(adapterLanguage)
-
     }
 
     private fun setDatePicker(){
@@ -122,7 +120,7 @@ class GraphActivity : AppCompatActivity() {
                     Status.LOADING -> {
                         onGraphActivityBinding.progressBar.visibility = View.VISIBLE
                         onGraphActivityBinding.svForm.visibility = View.GONE
-                        Toast.makeText(applicationContext, "generating...", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Generating...", Toast.LENGTH_SHORT).show()
                     }
                     Status.SUCCESS -> {
                         onGraphActivityBinding.progressBar.visibility = View.GONE
@@ -131,15 +129,12 @@ class GraphActivity : AppCompatActivity() {
                         val intent = Intent(this, ResultActivity::class.java)
                         intent.putExtra("EXTRA_RESULT", data.data?.result)
                         startActivity(intent)
-
-
                     }
 
                     Status.ERROR->{
                         Toast.makeText(applicationContext, data.message, Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, FailedActivity::class.java)
                         startActivity(intent)
-
                     }
                 }
 

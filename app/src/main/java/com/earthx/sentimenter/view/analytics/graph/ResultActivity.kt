@@ -2,11 +2,9 @@ package com.earthx.sentimenter.view.analytics.graph
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.earthx.sentimenter.data.model.ResultGraphItem
-import com.earthx.sentimenter.data.source.remote.response.GenerateGraphResponse
 import com.earthx.sentimenter.databinding.ActivityResultBinding
 import com.earthx.sentimenter.view.analytics.graph.adapter.ResultListAdapter
 import com.github.mikephil.charting.charts.BarChart
@@ -20,6 +18,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 class ResultActivity : AppCompatActivity() {
     private lateinit var onResultActivityBinding: ActivityResultBinding
     private var listResult : ArrayList<ResultGraphItem> = ArrayList<ResultGraphItem>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onResultActivityBinding = ActivityResultBinding.inflate(layoutInflater)
