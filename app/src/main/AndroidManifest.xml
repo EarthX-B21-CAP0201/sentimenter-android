@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.analytics.sentiment.ResultSentimentActivity"></activity>
-        <activity android:name=".view.analytics.sentiment.SentimentActivity" />
+        <activity android:name=".view.analytics.sentiment.ResultSentimentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.analytics.sentiment.SentimentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.status.FailedActivity"
             android:theme="@style/AppTheme.NoActionBar" />

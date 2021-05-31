@@ -124,7 +124,7 @@
     <string name="labelDateEnd">date end</string>
     <string name="backbutton">backButton</string>
     <string name="result_text">"lorem ipsum"</string>
-    <string name="result_intro">Here's your result for </string>
+    <string name="result_intro">Here is your result for </string>
     <string name="result_percentage">72,8%</string>
     <string name="result_value">POSITIVE</string>
 

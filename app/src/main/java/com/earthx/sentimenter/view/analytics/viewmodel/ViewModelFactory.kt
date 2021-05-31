@@ -7,6 +7,7 @@ import com.earthx.sentimenter.data.repository.AnalyticsRepository
 
 import com.earthx.sentimenter.di.Injection
 import com.earthx.sentimenter.view.analytics.graph.GraphViewModel
+import com.earthx.sentimenter.view.analytics.sentiment.SentimentViewModel
 
 class ViewModelFactory private constructor(private val mAnalyticsRepository: AnalyticsRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -27,6 +28,9 @@ class ViewModelFactory private constructor(private val mAnalyticsRepository: Ana
         when {
             modelClass.isAssignableFrom(GraphViewModel::class.java) -> {
                 return GraphViewModel(mAnalyticsRepository) as T
+            }
+            modelClass.isAssignableFrom(SentimentViewModel::class.java) -> {
+                return SentimentViewModel(mAnalyticsRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

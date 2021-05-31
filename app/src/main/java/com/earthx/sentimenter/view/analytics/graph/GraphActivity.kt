@@ -129,15 +129,12 @@ class GraphActivity : AppCompatActivity() {
                         val intent = Intent(this, ResultActivity::class.java)
                         intent.putExtra("EXTRA_RESULT", data.data?.result)
                         startActivity(intent)
-
-
                     }
 
                     Status.ERROR->{
                         Toast.makeText(applicationContext, data.message, Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, FailedActivity::class.java)
                         startActivity(intent)
-
                     }
                 }
 

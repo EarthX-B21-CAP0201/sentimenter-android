@@ -11,7 +11,6 @@ import com.earthx.sentimenter.R
 import com.earthx.sentimenter.data.model.ResultGraphItem
 
 
-
 class ResultListAdapter(val listResult: ArrayList<ResultGraphItem>, val context : Context) : RecyclerView.Adapter<ResultListAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {

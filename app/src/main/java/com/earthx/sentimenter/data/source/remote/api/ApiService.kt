@@ -31,4 +31,14 @@ interface ApiService {
                       @Field("date_end") dateEnd:String
     ): Call<GenerateGraphResponse>
 
+    @FormUrlEncoded
+    @POST(BuildConfig.BASE_URL+"analytics/sentiment/generate")
+    fun generateSentiment(@Header("x-access-token") token:String,
+                      @Field("keyword") keyword:String
+    ): Call<GenerateSentimentResponse>
+
+    @GET(BuildConfig.BASE_URL+"analytics/history")
+    fun getLastActivity(@Header("x-access-token") token:String
+    ): Call<LastActivityResponse>
+
 }
