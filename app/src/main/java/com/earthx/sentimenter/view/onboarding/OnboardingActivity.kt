@@ -59,12 +59,12 @@ class OnboardingActivity : AppCompatActivity() {
                 OnboardingItem(
                     onboardingImage = R.drawable.featureone,
                     title = "Top 10 Chart",
-                    description = "Lorem Ipsum Sir Dolor Amet"
+                    description = "Check the trending topics now!"
                 ),
                 OnboardingItem(
                     onboardingImage = R.drawable.featuretwo,
                     title = "Sentiment Analysis",
-                    description = "Lorem Ipsum Sir Dolor Amet"
+                    description = "Find out the sentiment behind something that you are curious about"
                 )
         ))
        onboardingBinding.onboardingViewPager.adapter = onboardingItemsAdapter
