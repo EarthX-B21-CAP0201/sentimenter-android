@@ -36,6 +36,9 @@ class SentimentActivity : AppCompatActivity() {
         _onGraphSentimentBinding.buttonGenerate.setOnClickListener {
             generateSentiment()
         }
+        _onGraphSentimentBinding.backButton.setOnClickListener {
+            onBackPressed()
+        }
         _onGraphSentimentBinding.progressBar.visibility = View.GONE
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[SentimentViewModel::class.java]

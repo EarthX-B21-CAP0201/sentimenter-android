@@ -55,7 +55,7 @@ class GraphActivity : AppCompatActivity() {
 
     }
     private fun setDropdownMenus(){
-        val itemsCategory = listOf("Category 1", "Category 2", "Category 3", "Category 4")
+        val itemsCategory = listOf("Brand", "Movie", "Video Game", "Musician", "Actor")
         val adapterCategory = ArrayAdapter(this, R.layout.list_item, itemsCategory)
         onGraphActivityBinding.menuCategoryAutoComplete.setAdapter(adapterCategory)
 
