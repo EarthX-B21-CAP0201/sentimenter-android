@@ -75,9 +75,9 @@
 
             <TextView
                 android:id="@+id/textGraph"
-                android:layout_width="130dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="65dp"
                 android:layout_toEndOf="@id/graph"
                 android:text="@string/top_10_graph"
@@ -151,6 +151,7 @@
         android:id="@+id/rv_activity"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:clipToPadding="false"
         android:padding="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
