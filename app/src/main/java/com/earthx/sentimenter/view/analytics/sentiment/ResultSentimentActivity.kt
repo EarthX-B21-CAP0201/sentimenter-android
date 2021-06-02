@@ -1,5 +1,6 @@
 package com.earthx.sentimenter.view.analytics.sentiment
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import com.earthx.sentimenter.R
 import com.earthx.sentimenter.data.model.ResultGraphItem
 import com.earthx.sentimenter.data.model.ResultSentiment
 import com.earthx.sentimenter.databinding.ActivityResultSentimentBinding
+import com.earthx.sentimenter.view.home.HomeActivity
 import com.github.mikephil.charting.data.*
 
 class ResultSentimentActivity : AppCompatActivity() {
@@ -20,7 +22,8 @@ class ResultSentimentActivity : AppCompatActivity() {
         _onResultSentimentBinding = ActivityResultSentimentBinding.inflate(layoutInflater)
         setContentView(_onResultSentimentBinding.root)
         _onResultSentimentBinding.backButton.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         }
         listResult = intent.getParcelableExtra<ResultSentiment>("EXTRA_RESULT") as ResultSentiment
         setPieChart()

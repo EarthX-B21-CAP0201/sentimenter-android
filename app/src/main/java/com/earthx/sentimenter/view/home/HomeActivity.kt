@@ -18,6 +18,8 @@ import com.earthx.sentimenter.view.home.adapter.LastActivityAdapter
 import com.earthx.sentimenter.view.home.viewmodel.ViewModelFactory
 import com.earthx.sentimenter.view.onboarding.OnboardingActivity
 import com.earthx.sentimenter.vo.Status
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeActivity : AppCompatActivity() {
 
@@ -80,6 +82,7 @@ class HomeActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, "Load success", Toast.LENGTH_SHORT).show()
                         onHomeBinding.rvActivity.layoutManager = LinearLayoutManager(this)
                         listResult = data.data?.result ?: ArrayList()
+                        listResult.reverse()
                         val listResultAdapter = LastActivityAdapter(listResult, this)
                         onHomeBinding.rvActivity.adapter = listResultAdapter
                     }
