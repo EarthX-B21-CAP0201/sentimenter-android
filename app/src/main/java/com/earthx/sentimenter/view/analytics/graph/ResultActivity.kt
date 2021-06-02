@@ -1,5 +1,6 @@
 package com.earthx.sentimenter.view.analytics.graph
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.earthx.sentimenter.data.model.ResultGraphItem
 import com.earthx.sentimenter.databinding.ActivityResultBinding
 import com.earthx.sentimenter.view.analytics.graph.adapter.ResultListAdapter
+import com.earthx.sentimenter.view.home.HomeActivity
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -24,7 +26,8 @@ class ResultActivity : AppCompatActivity() {
         onResultActivityBinding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(onResultActivityBinding.root)
         onResultActivityBinding.backButton.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         }
         listResult = intent.getParcelableArrayListExtra<ResultGraphItem>("EXTRA_RESULT") as ArrayList<ResultGraphItem>
         showChart()
