@@ -46,10 +46,10 @@
 
         <TextView
             android:id="@+id/textLabelKeyword"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginStart="50dp"
             android:layout_marginTop="40dp"
             android:text="@string/labelKeyword"
             android:textAllCaps="false"
@@ -62,8 +62,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginStart="50dp"
             android:layout_marginTop="5dp"
             android:hint="@string/labelKeyword"
             app:layout_constraintStart_toStartOf="parent"
