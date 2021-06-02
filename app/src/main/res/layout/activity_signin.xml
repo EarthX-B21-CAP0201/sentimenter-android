@@ -11,7 +11,7 @@
        android:id="@+id/backButton"
        android:layout_width="45dp"
        android:layout_height="45dp"
-       android:layout_marginLeft="15dp"
+       android:layout_marginStart="15dp"
        android:layout_marginTop="40dp"
        android:background="@drawable/button_shape"
        android:src="@drawable/round_icon_foreground"
@@ -30,7 +30,7 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/backButton"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="35dp"
         />
 
@@ -46,7 +46,7 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/textLogin"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="35dp"
         />
 
@@ -79,8 +79,8 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/emailTextField"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
         />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordTextField"
