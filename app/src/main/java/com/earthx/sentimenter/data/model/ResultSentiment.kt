@@ -7,10 +7,10 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ResultSentiment(
     @field:SerializedName("percentage")
-    val percentage: Int,
+    val percentage: Int? =0,
     @field:SerializedName("sentiment")
-    val sentiment: String,
+    val sentiment: String? = "",
     @field:SerializedName("name")
-    val name: String
+    val name: String? =""
 
 ): Parcelable
