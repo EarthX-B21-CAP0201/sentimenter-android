@@ -47,9 +47,9 @@ class HomeActivity : AppCompatActivity() {
         setContentView(onHomeBinding.root)
 
         onHomeBinding.textName.text = email
-        onHomeBinding.graph.setOnClickListener {
-            handleGraph()
-        }
+//        onHomeBinding.graph.setOnClickListener {
+//            handleGraph()
+//        }
         onHomeBinding.sentimentAnalysis.setOnClickListener {
             handleSentiment()
         }

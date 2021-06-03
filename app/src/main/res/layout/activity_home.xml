@@ -55,38 +55,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textName" >
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/graph"
-            android:layout_width="160dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="5dp"
-            app:cardMaxElevation="5dp" >
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/graph"-->
+<!--            android:layout_width="160dp"-->
+<!--            android:layout_height="110dp"-->
+<!--            android:layout_marginStart="21dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            app:cardElevation="5dp"-->
+<!--            app:cardMaxElevation="5dp" >-->
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="2dp"
-                android:contentDescription="@string/top_10_graph"
-                android:src="@drawable/ic_graph" />
+<!--            <ImageView-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginStart="45dp"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:contentDescription="@string/top_10_graph"-->
+<!--                android:src="@drawable/ic_graph" />-->
 
-            <TextView
-                android:id="@+id/textGraph"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="65dp"
-                android:layout_toEndOf="@id/graph"
-                android:text="@string/top_10_graph"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/textGraph"-->
+<!--                android:layout_width="150dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_marginTop="65dp"-->
+<!--                android:layout_toEndOf="@id/graph"-->
+<!--                android:text="@string/top_10_graph"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/colorBlack"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold" />-->
 
-        </androidx.cardview.widget.CardView>
+<!--        </androidx.cardview.widget.CardView>-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/sentimentAnalysis"
@@ -94,7 +94,7 @@
             android:layout_height="110dp"
             android:layout_marginStart="21dp"
             android:layout_marginTop="20dp"
-            android:layout_toEndOf="@id/graph"
+
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp"
             app:cardMaxElevation="5dp" >
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="55dp"
-                android:layout_toEndOf="@id/graph"
+
                 android:text="@string/sentiment_analysis"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack"

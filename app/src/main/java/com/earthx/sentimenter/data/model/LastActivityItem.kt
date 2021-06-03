@@ -13,6 +13,7 @@ data class LastActivityItem(
     @field:SerializedName("type")
     val type: String,
     @field:SerializedName("keyword")
-    val keyword: String
-
+    val keyword: String,
+    @field:SerializedName("result")
+    val result : ResultSentiment
 ): Parcelable

@@ -56,11 +56,11 @@ class OnboardingActivity : AppCompatActivity() {
     private fun setOnboardingItems(){
         onboardingItemsAdapter = OnboardingItemsAdapter(
             listOf(
-                OnboardingItem(
-                    onboardingImage = R.drawable.featureone,
-                    title = "Top 10 Chart",
-                    description = "Check the trending topics now!"
-                ),
+//                OnboardingItem(
+//                    onboardingImage = R.drawable.featureone,
+//                    title = "Top 10 Chart",
+//                    description = "Check the trending topics now!"
+//                ),
                 OnboardingItem(
                     onboardingImage = R.drawable.featuretwo,
                     title = "Sentiment Analysis",
