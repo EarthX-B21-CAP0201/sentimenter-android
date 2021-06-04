@@ -32,7 +32,7 @@ interface ApiService {
     ): Call<GenerateGraphResponse>
 
     @FormUrlEncoded
-    @POST(BuildConfig.BASE_URL+"analytics/sentiment/generate")
+    @POST(BuildConfig.BASE_URL+"analysis")
     fun generateSentiment(@Header("x-access-token") token:String,
                       @Field("keyword") keyword:String
     ): Call<GenerateSentimentResponse>

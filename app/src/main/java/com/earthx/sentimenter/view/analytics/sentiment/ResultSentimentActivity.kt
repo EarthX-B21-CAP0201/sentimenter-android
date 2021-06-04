@@ -35,6 +35,7 @@ class ResultSentimentActivity : AppCompatActivity() {
         _onResultSentimentBinding.resultPercentage.text = listResult.percentage.toString() + "%"
         _onResultSentimentBinding.resultValue.text = listResult.sentiment
         _onResultSentimentBinding.resultText.text = "'" + listResult.name + "'"
+        _onResultSentimentBinding.resultTotalTweet.text = "Total tweets: "+ listResult.total_tweet.toString()
 
         val entries = ArrayList<PieEntry>()
         entries.add(PieEntry(0.7f, "Positive"))
