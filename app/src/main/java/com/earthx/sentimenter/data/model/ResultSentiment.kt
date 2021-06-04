@@ -11,6 +11,8 @@ data class ResultSentiment(
     @field:SerializedName("sentiment")
     val sentiment: String? = "",
     @field:SerializedName("name")
-    val name: String? =""
+    val name: String? ="",
+    @field:SerializedName("total_tweet")
+    val total_tweet: Int? =0
 
 ): Parcelable

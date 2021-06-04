@@ -127,5 +127,6 @@
     <string name="result_intro">Here is your result for </string>
     <string name="result_percentage">72,8%</string>
     <string name="result_value">POSITIVE</string>
+    <string name="result_total_tweet">total tweet</string>
 
 </resources>
