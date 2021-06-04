@@ -1,15 +1,11 @@
-# Sentimenter
-
-It is project for Bangkit Capstone 2021
 [![Contributors][contributors-shield]][contributors-url]
-
 
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="app/src/main/res/drawable/logo.png" alt="Sentimenter" width="80" height="80">
+    <img src="app/src/main/res/drawable/logo.png" alt="Sentimenter" width="160" height="160">
   </a>
 
   <h3 align="center">Sentimenter</h3>
