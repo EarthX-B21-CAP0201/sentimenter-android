@@ -164,10 +164,10 @@ class RemoteDataSource private constructor(private val remoteDataSource: ApiCall
         return data
     }
 
-    fun generateSentiment(token:String, keyword:String):LiveData<ApiResponse<GenerateSentimentResponse>> {
+    fun generateSentiment(token:String, keyword:String, language:String):LiveData<ApiResponse<GenerateSentimentResponse>> {
         val data = MutableLiveData<ApiResponse<GenerateSentimentResponse>>()
         remoteDataSource.generateSentiment(
-            token,keyword,
+            token,keyword,language,
             object :
                 ApiCallback<GenerateSentimentResponse> {
                 override fun onCallSuccess(value: GenerateSentimentResponse) {

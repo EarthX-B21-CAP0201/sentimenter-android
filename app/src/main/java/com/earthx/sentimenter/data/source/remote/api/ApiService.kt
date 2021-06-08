@@ -34,7 +34,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST(BuildConfig.BASE_URL+"analysis")
     fun generateSentiment(@Header("x-access-token") token:String,
-                      @Field("keyword") keyword:String
+                      @Field("keyword") keyword:String, @Field("language") language:String
     ): Call<GenerateSentimentResponse>
 
     @GET(BuildConfig.BASE_URL+"analytics/history")

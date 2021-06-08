@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -42,12 +43,20 @@ class SentimentActivity : AppCompatActivity() {
         _onGraphSentimentBinding.progressBar.visibility = View.GONE
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[SentimentViewModel::class.java]
+        setDropdownMenus()
+    }
+
+    private fun setDropdownMenus(){
+        val itemsLanguage = listOf("ind", "en")
+        val adapterLanguage =  ArrayAdapter(this, R.layout.list_item, itemsLanguage)
+      _onGraphSentimentBinding.menuLanguageAutoComplete.setAdapter(adapterLanguage)
     }
 
     private fun generateSentiment() {
         val keyword = _onGraphSentimentBinding.keywordTextField.editText?.text.toString()
+        val language = _onGraphSentimentBinding.menuLanguage.editText?.text.toString()
 
-        viewModel.generateSentiment(token,keyword).observe(this, Observer{
+        viewModel.generateSentiment(token,keyword,language).observe(this, Observer{
                 data->
             if(data !=null){
                 when(data.status){

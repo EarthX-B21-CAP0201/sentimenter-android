@@ -59,11 +59,12 @@ class AnalyticsRepository private constructor(private val remoteDataSource: Remo
 
     override fun generateSentiment(
         token: String,
-        keyword: String
+        keyword: String,
+        language:String
     ): LiveData<Resource<GenerateSentimentResponse>> {
         val result = MediatorLiveData<Resource<GenerateSentimentResponse>>()
         fun asLiveData(): LiveData<Resource<GenerateSentimentResponse>> = result
-        val userData:LiveData<ApiResponse<GenerateSentimentResponse>> = remoteDataSource.generateSentiment(token,keyword)
+        val userData:LiveData<ApiResponse<GenerateSentimentResponse>> = remoteDataSource.generateSentiment(token,keyword, language)
         result.value = Resource.loading(null)
 
         result.addSource(userData){response->

@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ResultSentiment(
     @field:SerializedName("percentage")
-    val percentage: Int? =0,
+    val percentage: Double? =0.0,
     @field:SerializedName("sentiment")
     val sentiment: String? = "",
     @field:SerializedName("name")
