@@ -7,7 +7,7 @@ import com.earthx.sentimenter.data.source.remote.response.GenerateSentimentRespo
 import com.earthx.sentimenter.vo.Resource
 
 class SentimentViewModel(private val analyticsRepository: AnalyticsRepository): ViewModel() {
-    fun generateSentiment(token:String, keyword:String
-    ): LiveData<Resource<GenerateSentimentResponse>> = analyticsRepository.generateSentiment(token,keyword);
+    fun generateSentiment(token:String, keyword:String, language:String
+    ): LiveData<Resource<GenerateSentimentResponse>> = analyticsRepository.generateSentiment(token,keyword, language);
 
 }

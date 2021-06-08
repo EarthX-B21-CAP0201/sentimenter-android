@@ -18,7 +18,7 @@ interface AnalyticsDataSource {
                       dateStart: String,
                       dateEnd: String): LiveData<Resource<GenerateGraphResponse>>
 
-    fun generateSentiment(token: String, keyword:String): LiveData<Resource<GenerateSentimentResponse>>
+    fun generateSentiment(token: String, keyword:String, language:String): LiveData<Resource<GenerateSentimentResponse>>
 
     fun getLastActivity(token: String): LiveData<Resource<LastActivityResponse>>
 }

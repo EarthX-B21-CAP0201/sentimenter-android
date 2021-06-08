@@ -32,7 +32,7 @@ class ResultSentimentActivity : AppCompatActivity() {
     }
 
     fun setPieChart() {
-        _onResultSentimentBinding.resultPercentage.text = listResult.percentage.toString() + "%"
+        _onResultSentimentBinding.resultPercentage.text =String.format("%.2f", listResult.percentage) +"%"
         _onResultSentimentBinding.resultValue.text = listResult.sentiment
         _onResultSentimentBinding.resultText.text = "'" + listResult.name + "'"
         _onResultSentimentBinding.resultTotalTweet.text = "Total tweets: "+ listResult.total_tweet.toString()

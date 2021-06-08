@@ -167,10 +167,10 @@ class ApiCall() {
     }
 
     fun generateSentiment(token: String,
-                      keyword:String,
+                      keyword:String, language:String,
                       callback: ApiCallback<GenerateSentimentResponse>){
         try{
-            val client = ApiConfig.getApiService().generateSentiment(token, keyword)
+            val client = ApiConfig.getApiService().generateSentiment(token, keyword, language)
             client.enqueue(object: Callback<GenerateSentimentResponse>{
                 override fun onResponse(
                     call: Call<GenerateSentimentResponse>,
